@@ -14,12 +14,11 @@ use function sprintf;
 
 class Router
 {
-    protected string $requestRoutePath;
-    protected string $requestRouteMethod;
-
     public function __construct(
         protected Request $request,
-        protected array $routes = []
+        protected array $routes = [],
+        protected string $requestRoutePath = '',
+        protected string $requestRouteMethod = ''
     ) {
         $this->requestRoutePath = $this->getRequestPath();
         $this->requestRouteMethod = $request->getServer()->getRequestMethod();
