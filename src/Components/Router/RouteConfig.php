@@ -41,13 +41,4 @@ class RouteConfig
         }
         return $convertRoutes;
     }
-
-    private function switchValueToArrayKeyName(array $argument): array
-    {
-        $convertArgument = [];
-        foreach ($argument as $argumentName) {
-            $convertArgument[$argumentName] = null;
-        }
-        return $convertArgument;
-    }
 }
