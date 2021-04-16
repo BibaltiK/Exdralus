@@ -22,8 +22,9 @@ class Router
     public function getRequestedRoute(): RouteEntity
     {
         $match = [];
+        $requestPath = $this->getRequestPath();
         foreach ($this->routes as $route) {
-            if (!$this->isRouteMatch($route, $match)) {
+            if (!$this->isRouteMatch($route, $match, $requestPath)) {
                 continue;
             }
             if ($route->hasArgument()) {
@@ -32,15 +33,15 @@ class Router
             return $route;
         }
         throw new RouteNotFoundException(
-            sprintf('No matching route found for: <b>%s</b>', $this->getRequestPath())
+            sprintf('No matching route found for: <b>%s</b>', $requestPath)
         );
     }
 
-    protected function isRouteMatch(RouteEntity $route, array &$match): bool
+    protected function isRouteMatch(RouteEntity $route, array &$match, string $requestPath): bool
     {
         return (bool)preg_match(
             $this->getRegEx($route->getMethod(), $route->getPath()),
-            $this->request->getServer()->getRequestMethod() . '_' . $this->getRequestPath(),
+            $this->request->getServer()->getRequestMethod() . '_' . $requestPath,
             $match
         );
     }
