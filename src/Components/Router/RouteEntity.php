@@ -6,15 +6,10 @@ namespace Exdrals\Exdralus\Components\Router;
 
 class RouteEntity
 {
-    public function __construct(
-        protected string $name,
-        protected string $path,
-        protected string $controller,
-        protected string $method,
-        protected array $argument = []
-    )
-    {
-    }
+    protected string $path = '';
+    protected string $controller = '';
+    protected string $method = '';
+    protected array $argument = [];
 
     public function hasArgument(): bool
     {
@@ -34,17 +29,6 @@ class RouteEntity
     public function setPath(string $path): self
     {
         $this->path = $path;
-        return $this;
-    }
-
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
         return $this;
     }
 

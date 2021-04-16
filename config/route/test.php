@@ -29,6 +29,6 @@ return [
         'path' => '/transaction/payment/(\w+)/(\d+)',
         'controller' => Transaction::class,
         'method' => 'GET',
-        'params' => ['paymentType', 'paymentCount']
+        'argument' => ['paymentType', 'paymentCount']
     ]
 ];

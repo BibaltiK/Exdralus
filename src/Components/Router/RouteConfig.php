@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Exdrals\Exdralus\Components\Router;
 
+use Exdrals\Exdralus\Components\Hydrator\SimpleRelectionHydrator;
+
 use function rtrim;
 use function glob;
 use function array_merge;
@@ -33,17 +35,9 @@ class RouteConfig
     private function mapArrayToObject(array $routes): array
     {
         $convertRoutes = [];
+        $hydrator = new SimpleRelectionHydrator();
         foreach ($routes as $route => $element) {
-            $convertRoutes[] = new RouteEntity(
-                $route,
-                $element['path'],
-                $element['controller'],
-                $element['method'],
-                $element['params'] ?? []
-            );
-            if (isset($element['params'])) {
-                $convertRoutes[array_key_last($convertRoutes)]->setArgument($this->switchValueToArrayKeyName($element['params']));
-            }
+            $convertRoutes[] = $hydrator->hydrate($element,new RouteEntity());
         }
         return $convertRoutes;
     }
