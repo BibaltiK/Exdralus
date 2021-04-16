@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Exdrals\Exdralus\Components\Router;
 
-use Exdrals\Exdralus\Components\Hydrator\SimpleRelectionHydrator as Hydrator;
+use Exdrals\Exdralus\Components\Hydrator\SimpleReflectionHydrator as Hydrator;
 
 use function rtrim;
 use function glob;

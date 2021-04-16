@@ -8,7 +8,7 @@ use Exception;
 use Exdrals\Exdralus\Components\Http\Request;
 use Exdrals\Exdralus\Components\Router\RouteConfig;
 use Exdrals\Exdralus\Components\Router\Router;
-use Exdrals\Exdralus\Components\Hydrator\SimpleRelectionHydrator as Hydrator;
+use Exdrals\Exdralus\Components\Hydrator\SimpleReflectionHydrator as Hydrator;
 
 use function error_reporting;
 use function ini_set;

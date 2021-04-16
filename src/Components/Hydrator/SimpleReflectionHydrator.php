@@ -6,7 +6,7 @@ namespace Exdrals\Exdralus\Components\Hydrator;
 
 use ReflectionClass;
 
-class SimpleRelectionHydrator
+class SimpleReflectionHydrator
 {
     public function hydrate(array $data, object $object): object
     {
