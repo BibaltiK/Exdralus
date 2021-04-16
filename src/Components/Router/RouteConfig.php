@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Exdrals\Exdralus\Components\Router;
 
-use Exdrals\Exdralus\Components\Hydrator\SimpleRelectionHydrator;
+use Exdrals\Exdralus\Components\Hydrator\SimpleRelectionHydrator as Hydrator;
 
 use function rtrim;
 use function glob;
@@ -13,7 +13,8 @@ use function array_merge;
 class RouteConfig
 {
     public function __construct(
-        protected string $routeConfigDir
+        protected string $routeConfigDir,
+        protected Hydrator $hydrator
     )
     {
         $this->routeConfigDir = rtrim($routeConfigDir, '/');
@@ -35,9 +36,8 @@ class RouteConfig
     private function hydrateArray(array $routes): array
     {
         $convertRoutes = [];
-        $hydrator = new SimpleRelectionHydrator();
         foreach ($routes as $route => $element) {
-            $convertRoutes[] = $hydrator->hydrate($element,new RouteEntity());
+            $convertRoutes[] = $this->hydrator->hydrate($element,new RouteEntity());
         }
         return $convertRoutes;
     }

@@ -8,6 +8,7 @@ use Exception;
 use Exdrals\Exdralus\Components\Http\Request;
 use Exdrals\Exdralus\Components\Router\RouteConfig;
 use Exdrals\Exdralus\Components\Router\Router;
+use Exdrals\Exdralus\Components\Hydrator\SimpleRelectionHydrator as Hydrator;
 
 use function error_reporting;
 use function ini_set;
@@ -19,7 +20,8 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 try {
     $request = new Request($_SERVER);
-    $routeConfig = new RouteConfig(__DIR__.'/config/route');
+    $hydrator = new Hydrator();
+    $routeConfig = new RouteConfig(__DIR__.'/config/route', $hydrator);
     $router = new Router($request, $routeConfig->getAllRoutesFromConfig());
     $route = $router->getRequestedRoute();
     var_dump($route);
