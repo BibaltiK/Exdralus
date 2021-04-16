@@ -29,10 +29,10 @@ class RouteConfig
             $routes = array_merge($routes, require_once $routeConfigFile);
         }
 
-        return $this->mapArrayToObject($routes);
+        return $this->hydrateArray($routes);
     }
 
-    private function mapArrayToObject(array $routes): array
+    private function hydrateArray(array $routes): array
     {
         $convertRoutes = [];
         $hydrator = new SimpleRelectionHydrator();
