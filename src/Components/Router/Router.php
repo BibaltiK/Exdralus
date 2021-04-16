@@ -15,10 +15,8 @@ class Router
 {
     public function __construct(
         protected Request $request,
-        protected array $routes = [],
-        protected string $requestRoutePath = ''
+        protected array $routes = []
     ) {
-        $this->requestRoutePath = $this->getRequestPath();
     }
 
     public function getRequestedRoute(): RouteEntity
@@ -34,21 +32,15 @@ class Router
             return $route;
         }
         throw new RouteNotFoundException(
-            sprintf('No matching route found for: <b>%s</b>', $this->requestRoutePath)
+            sprintf('No matching route found for: <b>%s</b>', $this->getRequestPath())
         );
-    }
-
-    protected function getRequestPath(): string
-    {
-        $requestPath = parse_url($this->request->getServer()->getRequestURI(), PHP_URL_PATH);
-        return rtrim($requestPath, '/') ?: $requestPath;
     }
 
     protected function isRouteMatch(RouteEntity $route, array &$match): bool
     {
         return (bool)preg_match(
             $this->getRegEx($route->getMethod(), $route->getPath()),
-            $this->requestRouteMethod . '_' . $this->request->getServer()->getRequestMethod(),
+            $this->request->getServer()->getRequestMethod() . '_' . $this->getRequestPath(),
             $match
         );
     }
@@ -56,6 +48,12 @@ class Router
     protected function getRegEx(string $method, string $route): string
     {
         return '~^(' . $method . ')_' . $route . '/?$~i';
+    }
+
+    protected function getRequestPath(): string
+    {
+        $requestPath = parse_url($this->request->getServer()->getRequestURI(), PHP_URL_PATH);
+        return rtrim($requestPath, '/') ?: $requestPath;
     }
 
     protected function getAllArguments(RouteEntity $route, array $match): array
