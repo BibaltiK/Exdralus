@@ -36,8 +36,8 @@ class RouteConfig
     private function hydrateArray(array $routes): array
     {
         $convertRoutes = [];
-        foreach ($routes as $route => $element) {
-            $convertRoutes[] = $this->hydrator->hydrate($element,new RouteEntity());
+        foreach ($routes as $route) {
+            $convertRoutes[] = $this->hydrator->hydrate($route,new RouteEntity());
         }
         return $convertRoutes;
     }
