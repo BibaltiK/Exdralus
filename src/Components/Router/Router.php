@@ -12,6 +12,8 @@ use function parse_url;
 use function preg_match;
 use function rtrim;
 use function sprintf;
+use function array_slice;
+use function array_shift;
 
 class Router
 {
