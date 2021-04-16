@@ -6,6 +6,8 @@ namespace Exdrals\Exdralus\Components\Router;
 
 use Exdrals\Exdralus\Components\Http\Request;
 
+use InvalidArgumentException;
+
 use function parse_url;
 use function preg_match;
 use function rtrim;
@@ -62,6 +64,11 @@ class Router
         $routeArgument = $route->getArgument();
         foreach ($routeArgument as &$key) {
             $key = array_shift($match);
+            if (!isset($key)) {
+                throw new InvalidArgumentException(
+                    sprintf('Missing argument for Route: <b>%s</b>', $route->getPath())
+                );
+            }
         }
         return $routeArgument;
     }
