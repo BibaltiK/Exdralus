@@ -16,11 +16,9 @@ class Router
     public function __construct(
         protected Request $request,
         protected array $routes = [],
-        protected string $requestRoutePath = '',
-        protected string $requestRouteMethod = ''
+        protected string $requestRoutePath = ''
     ) {
         $this->requestRoutePath = $this->getRequestPath();
-        $this->requestRouteMethod = $request->getServer()->getRequestMethod();
     }
 
     private function getRequestPath(): string
@@ -50,7 +48,7 @@ class Router
     {
         return (bool)preg_match(
             $this->getRegEx($route->getMethod(), $route->getPath()),
-            $this->requestRouteMethod . '_' . $this->requestRoutePath,
+            $this->requestRouteMethod . '_' . $this->request->getServer()->getRequestMethod(),
             $match
         );
     }
