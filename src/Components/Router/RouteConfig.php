@@ -38,7 +38,6 @@ class RouteConfig
                 $route,
                 $element['path'],
                 $element['controller'],
-                $element['action'],
                 $element['method'],
                 $element['params'] ?? []
             );

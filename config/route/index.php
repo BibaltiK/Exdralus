@@ -6,7 +6,6 @@ return [
     'index' => [
         'path' => '/',
         'controller' => Index::class,
-        'action' => 'index',
         'method' => 'GET'
     ]
 ];

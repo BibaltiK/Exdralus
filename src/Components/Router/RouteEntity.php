@@ -10,7 +10,6 @@ class RouteEntity
         protected string $name,
         protected string $path,
         protected string $controller,
-        protected string $action,
         protected string $method,
         protected array $argument = []
     )
@@ -57,17 +56,6 @@ class RouteEntity
     public function setController(string $controller): self
     {
         $this->controller = $controller;
-        return $this;
-    }
-
-    public function getAction(): string
-    {
-        return $this->action;
-    }
-
-    public function setAction(string $action): self
-    {
-        $this->action = $action;
         return $this;
     }
 
