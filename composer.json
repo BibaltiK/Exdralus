@@ -1,0 +1,21 @@
+{
+  "name": "exdrals/exdralus",
+  "description": "Learning Projekt",
+  "license": [
+    "MIT"
+  ],
+  "authors": [
+    {
+      "name": "bibaltik",
+      "email": "bibaltik@exdrals.de"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Exdrals\\Exdralus\\": "src/"
+    }
+  },
+  "require": {
+    "php": "^8.0"
+  }
+}

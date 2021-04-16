@@ -1,0 +1,77 @@
+body {
+    background-color: whitesmoke;
+}
+
+label {
+    font-size: 0.7em;
+}
+
+.navbar {
+    font-size: 1.0em;
+    color: lightgray;
+    padding: 0 0;
+}
+
+.bg-dark {
+    background-color: lightslategray !important;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: white;
+}
+
+.btn-sm {
+    font-size: 0.7em;
+}
+
+.btn-loggedbar {
+    color: #0;
+    background: linear-gradient(180deg, #fff, #f6f7f9);
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    margin-right: 3px
+}
+
+.btn-loggedbar:hover {
+    color: #00000;
+    background: linear-gradient(180deg, #fff, #e3e4e5);
+    border: 1px solid #c0c0c0;
+}
+
+.btn-loggedbar-success {
+    color: green;
+}
+
+.btn-loggedbar-success:hover {
+    color: green;
+}
+
+.btn-loggedbar-danger {
+    color: red;
+}
+
+.btn-loggedbar-danger:hover {
+    color: red;
+}
+
+.btn-loggedbar-info {
+    color: blue;
+}
+
+.btn-loggedbar-info:hover {
+    color: blue;
+}
+
+.btn-default {
+    background: linear-gradient(180deg, #fff, #f6f7f9);
+    border-color: #d3d4d9;
+    margin-right: 3px
+}
+
+.text-sm {
+    font-size: 0.7em;
+}
+
+#remember-me-label {
+    font-size: 0.7em;
+}
