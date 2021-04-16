@@ -21,12 +21,6 @@ class Router
         $this->requestRoutePath = $this->getRequestPath();
     }
 
-    private function getRequestPath(): string
-    {
-        $requestPath = parse_url($this->request->getServer()->getRequestURI(), PHP_URL_PATH);
-        return rtrim($requestPath, '/') ?: $requestPath;
-    }
-
     public function getRequestedRoute(): RouteEntity
     {
         $match = [];
@@ -44,7 +38,13 @@ class Router
         );
     }
 
-    private function isRouteMatch(RouteEntity $route, array &$match): bool
+    protected function getRequestPath(): string
+    {
+        $requestPath = parse_url($this->request->getServer()->getRequestURI(), PHP_URL_PATH);
+        return rtrim($requestPath, '/') ?: $requestPath;
+    }
+
+    protected function isRouteMatch(RouteEntity $route, array &$match): bool
     {
         return (bool)preg_match(
             $this->getRegEx($route->getMethod(), $route->getPath()),
@@ -53,12 +53,12 @@ class Router
         );
     }
 
-    private function getRegEx(string $method, string $route): string
+    protected function getRegEx(string $method, string $route): string
     {
         return '~^(' . $method . ')_' . $route . '/?$~i';
     }
 
-    private function getAllArguments(RouteEntity $route, array $match): array
+    protected function getAllArguments(RouteEntity $route, array $match): array
     {
         $routeArgument = $route->getArgument();
         foreach ($routeArgument as &$key) {
