@@ -1,6 +1,5 @@
 <?php
 
-//TODO rename Propertys and Methods
 declare(strict_types=1);
 
 namespace Exdrals\Exdralus\Components\Router;
