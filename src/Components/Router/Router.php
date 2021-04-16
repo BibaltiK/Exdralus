@@ -24,7 +24,7 @@ class Router
         $match = [];
         $requestPath = $this->getRequestPath();
         foreach ($this->routes as $route) {
-            if (!$this->isRouteMatch($route, $match, $requestPath)) {
+            if (!$this->isRouteMatch($route, $requestPath, $match )) {
                 continue;
             }
             if ($route->hasArgument()) {
@@ -37,7 +37,7 @@ class Router
         );
     }
 
-    protected function isRouteMatch(RouteEntity $route, array &$match, string $requestPath): bool
+    protected function isRouteMatch(RouteEntity $route, string $requestPath, array &$match): bool
     {
         return (bool)preg_match(
             $this->getRegEx($route->getMethod(), $route->getPath()),
