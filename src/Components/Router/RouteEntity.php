@@ -11,16 +11,6 @@ class RouteEntity
     protected string $method = '';
     protected array $argument = [];
 
-    public function hasArgument(): bool
-    {
-        return isset($this->argument);
-    }
-
-    public function getArgumentCount(): int
-    {
-        return count($this->argument);
-    }
-
     public function getPath(): string
     {
         return $this->path;

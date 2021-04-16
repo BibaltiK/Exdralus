@@ -29,8 +29,8 @@ class Router
             if (!$this->isRouteMatch($route, $requestPath, $match )) {
                 continue;
             }
-            if ($route->hasArgument()) {
-                $route->setArgument($this->getAllArguments($route, array_slice($match, 2)));
+            if ($route->getArgument() !== null) {
+                $route->setArgument($this->getArgumentsFromRouteMatch($route, array_slice($match, 2)));
             }
             return $route;
         }
@@ -59,7 +59,7 @@ class Router
         return rtrim($requestPath, '/') ?: $requestPath;
     }
 
-    protected function getAllArguments(RouteEntity $route, array $match): array
+    protected function getArgumentsFromRouteMatch(RouteEntity $route, array $match): array
     {
         $routeArgument = $route->getArgument();
         foreach ($routeArgument as &$key) {
