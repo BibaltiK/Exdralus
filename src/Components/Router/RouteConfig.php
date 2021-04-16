@@ -10,9 +10,9 @@ use function array_merge;
 
 class RouteConfig
 {
-    protected string $routeConfigDir;
-
-    public function __construct(string $routeConfigDir)
+    public function __construct(
+        protected string $routeConfigDir
+    )
     {
         $this->routeConfigDir = rtrim($routeConfigDir, '/');
     }
