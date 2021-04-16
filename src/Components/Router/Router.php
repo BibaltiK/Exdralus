@@ -63,8 +63,8 @@ class Router
     {
         $routeArgument = $route->getArgument();
         foreach ($routeArgument as &$key) {
-            $key = array_shift($match);
-            if (!isset($key)) {
+            if (null === $key = array_shift($match))
+            {
                 throw new InvalidArgumentException(
                     sprintf('Missing argument for Route: <b>%s</b>', $route->getPath())
                 );
