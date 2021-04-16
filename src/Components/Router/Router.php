@@ -1,4 +1,5 @@
 <?php
+
 //TODO rename Propertys and Methods
 declare(strict_types=1);
 
@@ -11,17 +12,23 @@ use function preg_match;
 use function rtrim;
 use function sprintf;
 
-final class Router
+class Router
 {
-    private string $requestRoutePath;
-    private string $requestRouteMethod;
+    protected string $requestRoutePath;
+    protected string $requestRouteMethod;
 
     public function __construct(
-        private Request $request,
-        private array $routes = [])
-    {
+        protected Request $request,
+        protected array $routes = []
+    ) {
         $this->requestRoutePath = $this->getRequestPath();
         $this->requestRouteMethod = $request->getServer()->getRequestMethod();
+    }
+
+    private function getRequestPath(): string
+    {
+        $requestPath = parse_url($this->request->getServer()->getRequestURI(), PHP_URL_PATH);
+        return rtrim($requestPath, '/') ?: $requestPath;
     }
 
     public function getRequestedRoute(): RouteEntity
@@ -32,19 +39,13 @@ final class Router
                 continue;
             }
             if ($route->hasArgument()) {
-                $route->setArgument($this->getAllArguments($route, array_slice($match,2)));
+                $route->setArgument($this->getAllArguments($route, array_slice($match, 2)));
             }
             return $route;
         }
         throw new RouteNotFoundException(
             sprintf('No matching route found for: <b>%s</b>', $this->requestRoutePath)
         );
-    }
-
-    private function getRequestPath(): string
-    {
-        $requestPath = parse_url($this->request->getServer()->getRequestURI(), PHP_URL_PATH);
-        return rtrim($requestPath, '/') ?: $requestPath;
     }
 
     private function isRouteMatch(RouteEntity $route, array &$match): bool

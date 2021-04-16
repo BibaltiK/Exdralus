@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Exdrals\Exdralus\Components\Router;
 
-final class RouteEntity
+class RouteEntity
 {
     public function __construct(
-        private string $name,
-        private string $path,
-        private string $controller,
-        private string $action,
-        private string $method,
-        private array $argument = []
+        protected string $name,
+        protected string $path,
+        protected string $controller,
+        protected string $action,
+        protected string $method,
+        protected array $argument = []
     )
     {
     }

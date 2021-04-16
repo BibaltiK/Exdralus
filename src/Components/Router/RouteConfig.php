@@ -8,9 +8,9 @@ use function rtrim;
 use function glob;
 use function array_merge;
 
-final class RouteConfig
+class RouteConfig
 {
-    private string $routeConfigDir;
+    protected string $routeConfigDir;
 
     public function __construct(string $routeConfigDir)
     {
