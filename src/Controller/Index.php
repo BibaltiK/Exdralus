@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace Exdrals\Exdralus\Controller;
 
 
-class Index
+class Index implements Controller
 {
     public function __construct()
     {
     }
 
-    public function index()
+    public function process()
     {
-        echo 'index';
+        // TODO: Implement process() method.
     }
 }
