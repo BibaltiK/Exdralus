@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Exdrals\Exdralus\App;
+namespace Exdrals\Exdralus\Controller;
 
 
 class Index
