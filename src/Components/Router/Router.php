@@ -32,7 +32,6 @@ class Router
                 continue;
             }
             if ($route->getArgument() !== null) {
-                var_dump($route);
                 $route->setArgument($this->getArgumentsFromRouteMatch($route, array_slice($match, 2)));
             }
             return $route;
