@@ -32,6 +32,7 @@ class Router
                 continue;
             }
             if ($route->getArgument() !== null) {
+                var_dump($route);
                 $route->setArgument($this->getArgumentsFromRouteMatch($route, array_slice($match, 2)));
             }
             return $route;
@@ -44,13 +45,13 @@ class Router
     protected function isRouteMatch(RouteEntity $route, string $requestPath, array &$match): bool
     {
         return (bool)preg_match(
-            $this->getRegEx($route->getMethod(), $route->getPath()),
+            $this->getRegExForMatchingRoute($route->getMethod(), $route->getPath()),
             $this->request->getServer()->getRequestMethod() . '_' . $requestPath,
             $match
         );
     }
 
-    protected function getRegEx(string $method, string $route): string
+    protected function getRegExForMatchingRoute(string $method, string $route): string
     {
         return '~^(' . $method . ')_' . $route . '/?$~i';
     }
