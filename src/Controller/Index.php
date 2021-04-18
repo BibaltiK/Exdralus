@@ -7,10 +7,6 @@ namespace Exdrals\Exdralus\Controller;
 
 class Index implements Controller
 {
-    public function __construct()
-    {
-    }
-
     public function process()
     {
         // TODO: Implement process() method.
