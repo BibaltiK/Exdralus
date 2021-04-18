@@ -64,14 +64,15 @@ class Router
     protected function getArgumentsFromRouteMatch(RouteEntity $route, array $match): array
     {
         $routeArgument = $route->getArgument();
-        foreach ($routeArgument as &$value) {
-            if (null === $value = array_shift($match))
+        $arguments = [];
+        foreach ($routeArgument as $keyName) {
+            if (null === $arguments[$keyName] = array_shift($match))
             {
                 throw new InvalidArgumentException(
                     sprintf('Missing argument for Route: <b>%s</b>', $route->getPath())
                 );
             }
         }
-        return $routeArgument;
+        return $arguments;
     }
 }
