@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Exdrals\Exdralus;
 
 use Exception;
-use Exdrals\Exdralus\Components\Http\Request;
+use Exdrals\Exdralus\Components\Config\ConfigLoader;
+use Exdrals\Exdralus\Components\Dependency\Container;
 use Exdrals\Exdralus\Components\Router\RouteConfigLoader;
 use Exdrals\Exdralus\Components\Router\Router;
-use Exdrals\Exdralus\Components\Hydrator\SimpleReflectionHydrator as Hydrator;
 
 use function error_reporting;
 use function ini_set;
@@ -19,12 +19,13 @@ ini_set('display_errors', 'On');
 require_once __DIR__ . '/vendor/autoload.php';
 
 try {
-    $request = new Request($_SERVER);
-    $hydrator = new Hydrator();
-    $routeConfig = new RouteConfigLoader(__DIR__.'/config/route', $hydrator);
-    $routes = $routeConfig->getHydratedRouteConfig();
-    $router = new Router($request, $routes);
-    $route = $router->getRequestedRoute();
+    $dependencyConfigLoader = new ConfigLoader(__DIR__ . '/config/dependency');
+    $dependency = new Container($dependencyConfigLoader->getAllRoutesFromConfig());
+    $dependency->setParam('server', $_SERVER);
+    $dependency->setParam('routeConfig', __DIR__ . '/config/route');
+    $dependency->setParam('routes',$dependency->get(RouteConfigLoader::class)->getHydratedRouteConfig());
+
+    $route = $dependency->get(Router::class)->getRequestedRoute();
     var_dump($route);
 } catch (Exception $e) {
     echo $e->getMessage();
