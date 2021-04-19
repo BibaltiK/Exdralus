@@ -30,22 +30,20 @@ class Container implements ContainerInterface
         $this->params[$keyName] = $param;
     }
 
-    //TODO max. one Return Type
-    public function get($id): object|array|string
+    public function get($id): object
     {
         if ( (isset($this->objects[$id])) || array_key_exists($id, $this->objects)) {
             return $this->objects[$id];
         }
-        //TODO Repetition is removed on solution for return type
-        if (isset($this->params[$id]) || array_key_exists($id, $this->params)) {
-            return $this->params[$id];
-        }
 
         if (!$this->has($id)) {
-            throw new DependencyNotFoundException(sprintf('Dependency %s does not exist', $id));
+            throw new DependencyNotFoundException(sprintf('Dependency <b>%s</b> does not exist', $id));
         }
 
-        $params = array_map([$this, 'get'], $this->dependencies[$id]);
+        $params = [];
+        foreach ($this->dependencies[$id] as $dependency ) {
+            $params[] = class_exists($dependency) ? $this->get($dependency) : $this->getParam($dependency);
+        }
 
         return $this->objects[$id] = new $id(...$params);
     }
@@ -53,5 +51,13 @@ class Container implements ContainerInterface
     public function has($id): bool
     {
         return isset($this->dependencies[$id]) || array_key_exists($id, $this->dependencies);
+    }
+
+    protected function getParam(string $param): mixed
+    {
+        if (isset($this->params[$param]) || array_key_exists($param, $this->params)) {
+            return $this->params[$param];
+        }
+        throw new DependencyNotFoundException(sprintf('Dependency <b>%s</b> does not exist', $param));
     }
 }
