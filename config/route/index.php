@@ -1,6 +1,6 @@
 <?php
 
-use Exdrals\Exdralus\App\Index;
+use Exdrals\Exdralus\Controller\Index;
 
 return [
     'index' => [

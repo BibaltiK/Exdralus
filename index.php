@@ -26,7 +26,7 @@ try {
     $dependency->setParam('routes',$dependency->get(RouteConfigLoader::class)->getHydratedRouteConfig());
 
     $route = $dependency->get(Router::class)->getRequestedRoute();
-    var_dump($route);
+    $dependency->get($route->getController())->process();
 } catch (Exception $e) {
     echo $e->getMessage();
 }
