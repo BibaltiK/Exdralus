@@ -17,6 +17,7 @@
   },
   "require": {
     "php": "^8.0",
-    "psr/container": "^2"
+    "psr/container": "^2",
+    "psr/http-server-middleware": "^1.0"
   }
 }
